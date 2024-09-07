@@ -1,0 +1,10 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registration</title>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+</head>
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Зарегистрироваться</button>
+</form>

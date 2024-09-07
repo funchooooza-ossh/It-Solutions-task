@@ -1,0 +1,25 @@
+<ul>
+  {% for item in menu.items.all %}
+  <div class="{% if item.url == request.path %}active{% endif %}">
+    {% if item.parent == None %}
+    <a href="{{ item.url }}">
+      {% if item.url == request.build_absolute_uri %}
+      <strong>{{ item.title }}</strong>
+      {% else %} {{ item.title }} {% endif %}
+    </a>
+    {% endif %} {% if item.children %}
+    <ul style="padding-left: 20px">
+      {% for child in item.children.all %}
+      <li>
+        {% if child.url == request.build_absolute_uri %}
+        <strong><a href="{{ child.url }}">{{ child.title }}</a></strong>
+        {% else %}
+        <a href="{{ child.url }}">{{ child.title }}</a>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  {% endfor %}
+</ul>

@@ -1,0 +1,20 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+</head>
+<form method="post">
+  {% csrf_token %}
+  <div>
+    <label for="phone">Номер телефона:</label>
+    <input type="text" id="phone" name="phone" required />
+    {{ serializer.errors.phone }}
+  </div>
+  <div>
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" name="password" required />
+    {{ serializer.errors.password }}
+  </div>
+  <button type="submit">Войти</button>
+</form>

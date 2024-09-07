@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %} {% block content %}
+
+<div class="content">
+  <p><strong>{{car.make}}</strong></p>
+  <p><strong>{{car.model}}</strong></p>
+  <p><strong>{{car.year}}</strong></p>
+  <p><strong>{{car.description|linebreaksbr}}</strong></p>
+  <p><strong>{{car.owner_first_name}} {{car.owner_last_name}}</strong></p>
+  <p><strong>{{car.formatted_create}}</strong></p>
+  {% if car.formatted_create != car.formatted_update %}
+  <p><strong>Изменено: {{car.formatted_update}}</strong></p>
+  {% endif %} {% if request.user == car.owner %}
+  <p><a href="{% url 'edit' car.id %}">Edit post</a></p>
+  <p><a href="{% url 'delete' car.id %}">Delete post</a></p>
+
+  {% elif request.user.is_staff %}
+  <p><a href="{% url 'edit' car.id %}">Edit post</a></p>
+  <p><a href="{% url 'delete' car.id %}">Delete post</a></p>
+  {% endif %} {% if request.user.is_authenticated %}
+  <h4>Leave a comment</h4>
+  <form action="" method="post">
+    {% csrf_token %} {{ form }}
+    <button type="submit" value="Sumbit">Submit</button>
+  </form>
+  {% endif %}
+
+  <h4>Comments</h4>
+
+  {% for comment in comments %}
+
+  <p>{{comment.author_first_name}} {{comment.author_last_name}}</p>
+  <p>{{comment.content|linebreaksbr}}</p>
+  <p>{{comment.formatted_create}}</p>
+
+  {% endfor %} {% endblock %}
+</div>

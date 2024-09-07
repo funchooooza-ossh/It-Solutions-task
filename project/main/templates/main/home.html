@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+{% load menu_tags %}
+{% block content %}
+
+<nav class="navigational"
+    {% if request.user.is_authenticated %}
+        <div>
+            <p><a href="{% url 'logout' %}">Logout</a></p>
+            <p><a href="{% url 'carcreate' %}">Create car</a></p>
+        </div>
+    {% else %}
+        <div>
+            <p><a href="{% url 'login' %}">Login</a></p>
+            <p><a href="{% url 'reg' %}">Registration</a></p>
+        </div>
+    {% endif %}
+</nav>
+
+    {% for car in cars %}
+
+        <div>
+            <div>
+                <h4>
+                    <a href="{% url 'detail' car.id %}">
+                        {{car.make}}
+                        {{car.model}}
+                    </a>
+                </h4>
+                <p><strong>{{car.year}}</strong></p>
+                <p><strong>{{car.owner_first_name}} {{car.owner_last_name}}</strong></p>
+                <p><strong>{{car.formatted_create}}</strong></p>
+                {% if car.formatted_create != car.formatted_update %}
+                    <p><strong>Изменено: {{car.formatted_update}}</strong></p>
+                {% endif %}
+                {% if car.comments_count < 1 %}
+                {% elif car.comments_count >= 1 %}
+                    <p>{{ car.comments_count }} comments</p>
+                {% endif %}
+            </div>
+        </div>
+
+    {% endfor %}
+
+{% endblock %}
