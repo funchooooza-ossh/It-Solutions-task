@@ -23,7 +23,7 @@ services:
     depends_on:
       - db
     environment:
-      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DJANGO_SECRET_KEY=${SECRET_KEY}
       - DJANGO_DEBUG=${DEBUG}
       - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}
       - DATABASE_NAME=${DATABASE_NAME}
