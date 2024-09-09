@@ -13,7 +13,9 @@
 1. git clone <ссылка на этот репозиторий>
 2. Нужно установить докер, идем сюда https://docs.docker.com/engine/install/ и выбираем вариант для своей os.
 3. Переходим в папку проекта, после чего в терминале пишем 'docker-compose up --build -d) //возможно у вас будет docker compose без дефиса.
-4. Пишем в терминале: docker-compose exec web python manage.py migrate
+4. Пишем в терминале: 
+    docker-compose exec web python makemigrations users
+    docker-compose exec web python manage.py migrate
 5.Создаем суперюзера: docker-compose exec web python manage.py createsuperuser
 6. После создания заходим в браузер или постман хост по умолчанию localhost
 ПРИМЕЧАНИЕ: файл .env включает в себя настройки данных для postgres и settings.py проекта, то есть вносить изменения можно в этом файле и они автоматически применятся и к поднимаемой базе, и к проекту.
